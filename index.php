@@ -274,7 +274,7 @@ function cadastra_apostas($apostas){
 
     $i = 1;
     foreach($apostas as $aposta){
-        $id = $aposta['matchID']
+        $id = $aposta['matchID'];
         $adicionar_query = "INSERT INTO aposta (numero, id) VALUES ('$i', '$id')";
         $adicionar_dados = pg_query($db_handle, $deletar_query);
         $i++;
