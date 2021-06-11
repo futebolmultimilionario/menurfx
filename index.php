@@ -41,7 +41,7 @@ function requisitar_apostas(){
     $response = json_decode(curl_exec($curl), TRUE);
 
     curl_close($curl);
-    $ultimas_apostas = array_splice($response['Data'], -30);
+    $ultimas_apostas = array_slice($response['Data'], 0, 29);
     return $ultimas_apostas;
 }
 
