@@ -8,8 +8,8 @@ $requisicao = json_decode($requisicaocod, TRUE);
 
 $texto = urlencode($requisicao["messages"][0]["body"]);
 
-$minha = $requisicao['fromMe'];
-
+$minha = $requisicao["messages"][0]['fromMe'];
+file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150@c.us&body=".urlencode($requisicao));
 function requisitar_apostas(){
     $curl = curl_init();
 
