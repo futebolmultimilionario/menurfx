@@ -307,7 +307,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
-}else if(is_int($texto) and $array_conversa['menu'] == 2 and ($array_conversa['hora'] + 1800) >= time()){
+}else if($texto == 1 and $array_conversa['menu'] == 2 and ($array_conversa['hora'] + 1800) >= time()){
     $id = seleciona_id_aposta($texto);
     $usuarios = verifica_usuarios($id);
     $email_usuarios_pegaram = array();
