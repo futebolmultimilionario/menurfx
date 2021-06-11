@@ -1,7 +1,7 @@
 <?php
 
-$APIurl = 'https://eu27.chat-api.com/instance194066/';
-$token = 'nijbp88m5fkl2w0r';
+$APIurl = 'https://eu210.chat-api.com/instance219965/';
+$token = '1krwdq4lagx0dj1p';
 
 $requisicaocod = file_get_contents("php://input");
 $requisicao = json_decode($requisicaocod, TRUE);
