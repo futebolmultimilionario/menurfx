@@ -262,7 +262,9 @@ function muda_usuario($usuario, $status){
 function seleciona_id_aposta($numero){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $seleciona_id = "SELECT id FROM aposta WHERE numero='$numero'";
-    $id = pg_query($db_handle, $seleciona_id);
+    $result = pg_query($db_handle, $seleciona_id);
+    $row = pg_fetch_assoc($result);
+    $id = $row['id'];
     return $id;
 }
 
@@ -307,7 +309,8 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
-}else if($texto == 1 and $array_conversa['menu'] == 2 and ($array_conversa['hora'] + 1800) >= time()){
+}else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa['hora'] + 1800) >= time()){
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=*Desligando contas. Aguarde...*");
     $id = seleciona_id_aposta($texto);
     $usuarios = verifica_usuarios($id);
     $email_usuarios_pegaram = array();
@@ -322,9 +325,9 @@ if(!empty($texto) and empty($array_conversa['menu'])){
 
     foreach($status as $user){
         if($user['statusPainel'] == 0){
-            $array_usuarios[$user['email']][2] = urlencode("⚫");
+            $array_usuarios[$user['email']][2] = "⚫";
         }else{
-            $array_usuarios[$user['email']][2] = urlencode("🟢");
+            $array_usuarios[$user['email']][2] = "🟢";
         }
     }
     foreach($array_usuarios as $usuario){
@@ -338,18 +341,19 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $deletar2_dados = pg_query($db_handle, $deletar2_query);
     $reiniciar =  "INSERT INTO chat (numero) VALUES (1)";
     $reiniciar_dados = pg_query($db_handle, $reiniciar);
-}else if($texto == 2 and empty($array_conversa['menu']) and ($array_conversa['hora'] + 1800)>= time()){
+}else if($texto == "2" and $array_conversa['menu'] == 1 and ($array_conversa['hora'] + 1800)>= time()){
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=*Religando contas. Aguarde...*");
     $usuarios = verifica_status();
     foreach($usuarios as $usuario){
         $array_usuarios = muda_usuario($usuario['email'], 1);
     }
     $status = verifica_status();
-    $mensagem = urlencode("*Usuários ligados:*");
+    $mensagem = urlencode("*Usuários ligados:*\n\n");
     foreach($status as $user){
         if($user['statusPainel'] == 0){
-            $array_usuarios[$user['email']][2] = urlencode("⚫");
+            $array_usuarios[$user['email']][2] = "⚫";
         }else{
-            $array_usuarios[$user['email']][2] = urlencode("🟢");
+            $array_usuarios[$user['email']][2] = "🟢";
         }
     }
     foreach($array_usuarios as $usuario){
