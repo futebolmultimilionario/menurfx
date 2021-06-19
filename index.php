@@ -118,7 +118,11 @@ return $response['Data'];
 
 function muda_usuario($usuario, $status){
     $curl = curl_init();
-    $array_usuarios = array("contarfxinvesting04@gmail.com" => array("04",
+    $array_usuarios = array("contarfxinvesting02@gmail.com" => array("02",
+                                                                    "crenanrx",
+                                                                    "",
+                                                                    ""),
+                            "contarfxinvesting04@gmail.com" => array("04",
                                                                     "atilacg",
                                                                     "",
                                                                     ""),
@@ -136,6 +140,10 @@ function muda_usuario($usuario, $status){
                                                                     ""),
                             "contarfxinvesting09@gmail.com" => array("09",
                                                                     "thiagomorethsb",
+                                                                    "",
+                                                                    ""),
+                            "contarfxinvesting10@gmail.com" => array("10",
+                                                                    "vitorr08",
                                                                     "",
                                                                     ""),
                             "contarfxinvesting18@gmail.com" => array("18",
