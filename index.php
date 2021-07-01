@@ -303,10 +303,12 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $status = verifica_status();
     $mensagem = urlencode("*Usuários ligados:*\n\n");
     foreach($status as $user){
+        if(!empty($array_usuarios[$user['email']][0]){
         if($user['statusPainel'] == 0){
             $array_usuarios[$user['email']][2] = "⚫";
         }else{
             $array_usuarios[$user['email']][2] = "🟢";
+        }
         }
     }
     foreach($array_usuarios as $usuario){
