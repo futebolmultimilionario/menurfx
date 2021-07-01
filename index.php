@@ -8,6 +8,7 @@ $requisicao = json_decode($requisicaocod, TRUE);
 
 $texto = urlencode($requisicao["messages"][0]["body"]);
 
+
 $minha = $requisicao["messages"][0]['fromMe'];
 function requisitar_apostas(){
     $curl = curl_init();
