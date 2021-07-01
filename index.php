@@ -228,10 +228,12 @@ function cadastra_apostas($apostas){
 
     $i = 1;
     foreach($apostas as $aposta){
+        if($aposta['tipsterAtivo'] == 'jose alberto'){
         $id = $aposta['matchID'];
         $adicionar_query = "INSERT INTO aposta (numero, id) VALUES ('$i', '$id')";
         $adicionar_dados = pg_query($db_handle, $adicionar_query);
         $i++;
+        }
     }
 }
 
@@ -252,8 +254,10 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $apostas = requisitar_apostas();
     $i = 1;
     foreach($apostas as $aposta){
+        if($aposta['tipsterAtivo'] == 'jose alberto'){
         $mensagem = $mensagem.urlencode("*".$i.".* ".$aposta['evento']." - ".$aposta['aposta']."\n");
         $i++;
+        }
     }
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     cadastra_apostas($apostas);
