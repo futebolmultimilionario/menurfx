@@ -147,6 +147,10 @@ function muda_usuario($usuario, $status){
                                                                     "gesiaquino",
                                                                     "",
                                                                     ""),
+                            "contarfxinvesting09@gmail.com" => array("09",
+                                                                    "brunamaias",
+                                                                    "",
+                                                                    ""),
                             "contarfxinvesting10@gmail.com" => array("10",
                                                                     "segundosm29",
                                                                     "",
@@ -179,7 +183,6 @@ function muda_usuario($usuario, $status){
                                                                     "gabrielmelof_",
                                                                     "",
                                                                     ""));
-
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://automatips.com.br/api/Usuario/alteraStatusClientePainel?email='.$usuario.'&contaBet365='.$array_usuarios[$usuario][1].'&status='.$status.'&token=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A',
     CURLOPT_RETURNTRANSFER => true,
