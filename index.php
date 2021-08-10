@@ -119,7 +119,10 @@ return $response['Data'];
 
 function muda_usuario($usuario, $status){
     $curl = curl_init();
-    $array_usuarios = array(
+    $array_usuarios = array("contarfxinvesting01@gmail.com" => array("01",
+                                                                    "elenir19904",
+                                                                    "",
+                                                                    ""),
                             "contarfxinvesting02@gmail.com" => array("02",
                                                                     "joycehenrique",
                                                                     "",
@@ -157,7 +160,7 @@ function muda_usuario($usuario, $status){
                                                                     "",
                                                                     ""),
                             "contarfxinvesting14@gmail.com" => array("14",
-                                                                    "rb_portela",
+                                                                    "barbarajubert",
                                                                     "",
                                                                     ""),
                             "contarfxinvesting29@gmail.com" => array("17",
@@ -170,6 +173,10 @@ function muda_usuario($usuario, $status){
                                                                     ""),
                             "contarfxinvesting31@gmail.com" => array("19",
                                                                     "socorrobe",
+                                                                    "",
+                                                                    ""),
+                            "contarfxinvesting18@gmail.com" => array("20",
+                                                                    "gabrielmelof_",
                                                                     "",
                                                                     ""));
 
