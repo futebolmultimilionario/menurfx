@@ -13,31 +13,31 @@ $minha = $requisicao["messages"][0]['fromMe'];
 function requisitar_apostas(){
     $curl = curl_init();
 
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://automatips.com.br/api/Bot/getBets?token=F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC&pendentes=sim&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A&_=1623242988669',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'GET',
-    CURLOPT_HTTPHEADER => array(
-        'Connection: keep-alive',
-        'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-        'Accept: application/json, text/javascript, */*; q=0.01',
-        'cache-control: no-cache',
-        'X-Requested-With: XMLHttpRequest',
-        'sec-ch-ua-mobile: ?0',
-        'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',
-        'Sec-Fetch-Site: same-origin',
-        'Sec-Fetch-Mode: cors',
-        'Sec-Fetch-Dest: empty',
-        'Referer: https://automatips.com.br/v2/dashboardAdm.html',
-        'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Cookie: token="F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-06-30T02:40:16Z'
-    ),
-    ));
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://automatips.com.br/api/Bot/getBets?token=4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D&pendentes=sim&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A&_=1630162602502',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'authority: automatips.com.br',
+    'sec-ch-ua: "Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+    'accept: application/json, text/javascript, */*; q=0.01',
+    'cache-control: no-cache',
+    'x-requested-with: XMLHttpRequest',
+    'sec-ch-ua-mobile: ?0',
+    'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+    'sec-fetch-site: same-origin',
+    'sec-fetch-mode: cors',
+    'sec-fetch-dest: empty',
+    'referer: https://automatips.com.br/v2/dashboardAdm.html',
+    'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cookie: token="4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-08-29T02:40:16Z'
+  ),
+));
 
     $response = json_decode(curl_exec($curl), TRUE);
 
@@ -49,31 +49,31 @@ function requisitar_apostas(){
 function verifica_usuarios($id){
     $curl = curl_init();
 
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://automatips.com.br/api/Bot/getBetsUser?token=F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC&matchid='.$id.'&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A&_=1623271097668',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'GET',
-    CURLOPT_HTTPHEADER => array(
-        'Connection: keep-alive',
-        'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-        'Accept: application/json, text/javascript, */*; q=0.01',
-        'cache-control: no-cache',
-        'X-Requested-With: XMLHttpRequest',
-        'sec-ch-ua-mobile: ?0',
-        'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',
-        'Sec-Fetch-Site: same-origin',
-        'Sec-Fetch-Mode: cors',
-        'Sec-Fetch-Dest: empty',
-        'Referer: https://automatips.com.br/v2/dashboardAdm.html',
-        'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Cookie: token="F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-06-30T02:40:16Z'
-    ),
-    ));
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://automatips.com.br/api/Bot/getBetsUser?token=4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D&matchid='.$id.'&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A&_=1630162602507',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'authority: automatips.com.br',
+    'sec-ch-ua: "Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+    'accept: application/json, text/javascript, */*; q=0.01',
+    'cache-control: no-cache',
+    'x-requested-with: XMLHttpRequest',
+    'sec-ch-ua-mobile: ?0',
+    'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+    'sec-fetch-site: same-origin',
+    'sec-fetch-mode: cors',
+    'sec-fetch-dest: empty',
+    'referer: https://automatips.com.br/v2/dashboardAdm.html',
+    'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cookie: token="4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-08-29T02:40:16Z'
+  ),
+));
 
     $response = json_decode(curl_exec($curl), TRUE);
 
@@ -86,7 +86,7 @@ function verifica_status(){
     $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://automatips.com.br/api/Adm/getUsuarios?token=F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A',
+  CURLOPT_URL => 'https://automatips.com.br/api/Adm/getUsuarios?token=4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -95,19 +95,19 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
-    'Connection: keep-alive',
-    'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-    'Accept: application/json, text/javascript, */*; q=0.01',
-    'X-Requested-With: XMLHttpRequest',
+    'authority: automatips.com.br',
+    'sec-ch-ua: "Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+    'accept: application/json, text/javascript, */*; q=0.01',
+    'x-requested-with: XMLHttpRequest',
     'sec-ch-ua-mobile: ?0',
-    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',
-    'Content-Type: application/json; charset=utf-8',
-    'Sec-Fetch-Site: same-origin',
-    'Sec-Fetch-Mode: cors',
-    'Sec-Fetch-Dest: empty',
-    'Referer: https://automatips.com.br/v2/dashboardAdm.html',
-    'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-    'Cookie: token="F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-06-30T02:40:16Z'
+    'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+    'content-type: application/json; charset=utf-8',
+    'sec-fetch-site: same-origin',
+    'sec-fetch-mode: cors',
+    'sec-fetch-dest: empty',
+    'referer: https://automatips.com.br/v2/dashboardAdm.html',
+    'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cookie: token="4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-08-29T02:40:16Z'
   ),
 ));
 
@@ -176,30 +176,30 @@ function muda_usuario($usuario, $status){
                                                                     "",
                                                                     ""));
     curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://automatips.com.br/api/Usuario/alteraStatusClientePainel?email='.$usuario.'&contaBet365='.$array_usuarios[$usuario][1].'&status='.$status.'&token=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'GET',
-    CURLOPT_HTTPHEADER => array(
-        'Connection: keep-alive',
-        'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-        'Accept: application/json, text/javascript, */*; q=0.01',
-        'X-Requested-With: XMLHttpRequest',
-        'sec-ch-ua-mobile: ?0',
-        'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',
-        'Content-Type: application/json; charset=utf-8',
-        'Sec-Fetch-Site: same-origin',
-        'Sec-Fetch-Mode: cors',
-        'Sec-Fetch-Dest: empty',
-        'Referer: https://automatips.com.br/v2/dashboardAdm.html',
-        'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Cookie: token="F74jkq1kL5UOaWlR1rgFS56f5yiFPYgwOV9nT4y7molj28tlvB2078aofDE0RC"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-06-30T02:40:16Z'
-    ),
-    ));
+  CURLOPT_URL => 'https://automatips.com.br/api/Usuario/alteraStatusClientePainel?email='.$usuario.'&contaBet365='.$array_usuarios[$usuario][1].'&status='.$status.'&token=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'authority: automatips.com.br',
+    'sec-ch-ua: "Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+    'accept: application/json, text/javascript, */*; q=0.01',
+    'x-requested-with: XMLHttpRequest',
+    'sec-ch-ua-mobile: ?0',
+    'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+    'content-type: application/json; charset=utf-8',
+    'sec-fetch-site: same-origin',
+    'sec-fetch-mode: cors',
+    'sec-fetch-dest: empty',
+    'referer: https://automatips.com.br/v2/dashboardAdm.html',
+    'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cookie: token="4vP1qyA6QAb12tW34kSgVp01fjYm4cs8POlt5M75n13VmcXBcLcX3r50hySq5D"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-08-29T02:40:16Z'
+  ),
+));
 
     $response = json_decode(curl_exec($curl), TRUE);
 
