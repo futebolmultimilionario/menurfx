@@ -144,7 +144,7 @@ function muda_usuario($usuario, $status){
                                                                     "",
                                                                     ""),
                             "contarfxinvesting07@gmail.com" => array("07",
-                                                                    "gesiaquino",
+                                                                    "lucasdesan",
                                                                     "",
                                                                     ""),
                             "contarfxinvesting09@gmail.com" => array("09",
