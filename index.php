@@ -1,15 +1,140 @@
 <?php
 
-$APIurl = 'https://eu210.chat-api.com/instance219965/';
-$token = '1krwdq4lagx0dj1p';
-
-$requisicaocod = file_get_contents("php://input");
-$requisicao = json_decode($requisicaocod, TRUE);
-
-$texto = urlencode($requisicao["messages"][0]["body"]);
 
 
-$minha = $requisicao["messages"][0]['fromMe'];
+function verifica_contas_encerradas($id){
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://automatips.com.br/api/Adm/getLogAposta?token=soMe6uEUlLUIi6aslS1v7ons5EHGbnTkUQDMl9inUveRfXSpIEgdsQqeKGvdF3a&idAposta='.$id.'&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A&_=163501092167477',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array(
+        'authority: automatips.com.br',
+        'sec-ch-ua: "Chromium";v="94", "Google Chrome";v="94", ";Not A Brand";v="99"',
+        'accept: application/json, text/javascript, */*; q=0.01',
+        'cache-control: no-cache',
+        'x-requested-with: XMLHttpRequest',
+        'sec-ch-ua-mobile: ?0',
+        'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36',
+        'sec-ch-ua-platform: "Windows"',
+        'sec-fetch-site: same-origin',
+        'sec-fetch-mode: cors',
+        'sec-fetch-dest: empty',
+        'referer: https://automatips.com.br/v2/dashboardAdm.html',
+        'accept-language: pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+        'cookie: token="soMe6uEUlLUIi6aslS1v7ons5EHGbnTkUQDMl9inUveRfXSpIEgdsQqeKGvdF3a"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-10-31T02:40:16Z; io=bk6qwm8f6U90rdR8ACR5'
+    ),
+    ));
+
+    $response = json_decode(curl_exec($curl), TRUE)['Data'];
+
+    curl_close($curl);
+
+    $usuarios_novos = [];
+    foreach($response as $linha){
+        if($linha['logTexto'] == "Cashout realizado com sucesso!"){
+            $usuarios_novos[] = $linha['contausuario'];
+        }
+    }
+    $usuarios_novos = array_unique($usuarios_novos);
+
+    return $usuarios_novos;
+}
+
+function verifica_usuario($id, $usuarios_antigos, $partida){
+    $usuarios_novos = verifica_contas_encerradas($id);
+
+    if(count($usuarios_novos) != count($usuarios_antigos)){
+        envia_contas_encerradas($usuarios_novos, $partida);
+    }
+    return $usuarios_novos;
+}
+
+function envia_contas_encerradas($usuarios, $partida){
+    $APIurl = "https://eu210.chat-api.com/instance219965/";
+    $token = "1krwdq4lagx0dj1p";
+    $array_usuarios = array("joycehenrique" => array("02",
+                                                                    "joycehenrique",
+                                                                    "",
+                                                                    " ⚫"),
+                            "gme777" => array("03",
+                                                                    "gme777",
+                                                                    "",
+                                                                    " ⚫"),
+                            "brunnaqz" => array("05",
+                                                                    "brunnaqz",
+                                                                    "",
+                                                                    " ⚫"),
+                            "laianesouza1" => array("06",
+                                                                    "laianesouza1",
+                                                                    "",
+                                                                    " ⚫"),
+                            "taavinho223" => array("09",
+                                                                    "taavinho223",
+                                                                    "",
+                                                                    " ⚫"),
+                            "jessicascfc" => array("11",
+                                                                    "jessicascfc",
+                                                                    "",
+                                                                    " ⚫"),
+                            "alyssonslv" => array("14",
+                                                                    "alyssonslv",
+                                                                    "",
+                                                                    " ⚫"),
+                            "dantasx10" => array("18",
+                                                                    "dantasx10",
+                                                                    "",
+                                                                    " ⚫"),
+                            "amandahqcm" => array("30",
+                                                                    "amandahqcm",
+                                                                    "",
+                                                                    " ⚫"),
+                            "socorrobe" => array("31",
+                                                                    "socorrobe",
+                                                                    "",
+                                                                    " ⚫"),
+                            "diogosn20" => array("33",
+                                                                    "diogosn20",
+                                                                    "",
+                                                                    " ⚫"),
+                            "davi798" => array("34",
+                                                                    "davi798",
+                                                                    "",
+                                                                    " ⚫"),
+                            "felipepamonha" => array("36",
+                                                                    "felipepamonha",
+                                                                    "",
+                                                                    " ⚫"),
+                            "joaonobre22" => array("37",
+                                                                    "joaonobre22",
+                                                                    "",
+                                                                    " ⚫"),
+                            "evertongbabet" => array("38",
+                                                                    "evertongbabet",
+                                                                    "",
+                                                                    " ⚫"),
+                            "marconejs74" => array("40",
+                                                                    "marconejs74",
+                                                                    "",
+                                                                    " ⚫"));
+                                                                    
+    foreach($usuarios as $usuario){
+            $array_usuarios[$usuario][3] = " 🟢";
+    }
+
+    $mensagem = urlencode("*⚠️ ENCERRANDO APOSTA\n\n".$partida."*\n\n");
+    foreach($array_usuarios as $usuario){
+        $mensagem = $mensagem.urlencode($usuario[0]." - ".$usuario[1].$usuario[3]."\n");
+    }
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623295183@g.us&body=".$mensagem);
+
+}
 
 function encerra_aposta($id){
     $curl = curl_init();
@@ -261,6 +386,15 @@ function seleciona_id_aposta($numero){
     return $id;
 }
 
+function seleciona_partida_aposta($id){
+    $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
+    $seleciona_partida = "SELECT partida FROM aposta WHERE id='$id'";
+    $result = pg_query($db_handle, $seleciona_partida);
+    $row = pg_fetch_assoc($result);
+    $partida = $row['partida'];
+    return $partida;
+}
+
 function cadastra_apostas($apostas){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $deletar_query = "TRUNCATE TABLE aposta";
@@ -271,7 +405,8 @@ function cadastra_apostas($apostas){
         if($aposta['tipsterAtivo'] == 'jose alberto'){
         $id = $aposta['matchID'];
         $id2 = json_decode($aposta['dadosAposta'], TRUE)['betId'];
-        $adicionar_query = "INSERT INTO aposta (numero, id, id2) VALUES ('$i', '$id', '$id2')";
+        $partida = $aposta[0]['evento']." - ".$aposta[0]['mercado']." - ".$aposta[0]['aposta'];
+        $adicionar_query = "INSERT INTO aposta (numero, id, id2, partida) VALUES ('$i', '$id', '$id2', '$partida')";
         $adicionar_dados = pg_query($db_handle, $adicionar_query);
         $i++;
         }
@@ -286,6 +421,47 @@ function seleciona_id2($numero){
     $id2 = $row['id2'];
     return $id2;
 }
+
+function seleciona_numeropartida(){
+    $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
+    $seleciona_numeropartida = "SELECT numeropartida FROM chat WHERE numero='4'";
+    $result = pg_query($db_handle, $seleciona_numeropartida);
+    $row = pg_fetch_assoc($result);
+    $numeropartida = $row['numeropartida'];
+    return $numeropartida;
+}
+
+function envia_dados($data){
+    $data_string = json_encode($data);
+
+    $url = "https://menurfx.herokuapp.com";
+
+    $headr = array();
+    $headr[] = 'Content-length: '.strlen( $data_string );
+    $headr[] = 'Content-type: application/json';
+
+    $ch = curl_init( $url );
+
+    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+    curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+    curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, "POST" );
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, $data_string );
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt( $ch, CURLOPT_HTTPHEADER, $headr );
+
+    $result = curl_exec( $ch );
+}
+
+$APIurl = 'https://eu210.chat-api.com/instance219965/';
+$token = '1krwdq4lagx0dj1p';
+
+$requisicaocod = file_get_contents("php://input");
+$requisicao = json_decode($requisicaocod, TRUE);
+if(array_key_exists("messages")){
+$texto = urlencode($requisicao["messages"][0]["body"]);
+
+$minha = $requisicao["messages"][0]['fromMe'];
 
 $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
 $conversa_query = "SELECT * FROM chat WHERE numero=1";
@@ -334,9 +510,25 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if(is_numeric($texto) and $array_conversa['menu'] == 3 and ($array_conversa['hora'] + 1800) >= time()){
-    $id2 = seleciona_id2($texto);
+    $id = seleciona_id_aposta($texto);
+    $partida = seleciona_partida_aposta($id)
+    $menu = 4;
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Deseja realmente encerrar a seguinte aposta? ".$partida."*\n\n1. Sim\n2. Não"));
+    $update_menu = "UPDATE chat SET hora='$hora', menu='$menu', numeropartida = '$texto' WHERE numero=1";
+}else if((strtolower($texto) == "sim" or $texto == "1") and $array_conversa['menu'] == 4 and ($array_conversa['hora'] + 1800) >= time()){
+    $id2 = seleciona_id2(seleciona_numeropartida());
     encerra_aposta($id2);
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Comando de encerrar enviado. Confira no painel.*"));
+    $usuarios_antigos = array();
+    $id = seleciona_id_aposta($texto);
+    $partida = seleciona_partida_aposta($id);
+    for($i=0;$i<5;$i++){
+        sleep(5);
+        $usuarios_antigos = verifica_usuario($id, $usuarios_antigos, $partida);
+    }
+    $data = array($id, $usuarios_antigos, $partida, 1);
+
+    envia_dados($data);
+
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $deletar_query = "TRUNCATE TABLE aposta";
     $deletar_dados = pg_query($db_handle, $deletar_query);
@@ -344,7 +536,8 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $deletar2_dados = pg_query($db_handle, $deletar2_query);
     $reiniciar =  "INSERT INTO chat (numero) VALUES (1)";
     $reiniciar_dados = pg_query($db_handle, $reiniciar);
-}else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa['hora'] + 1800) >= time()){
+}
+else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa['hora'] + 1800) >= time()){
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Desligando contas. Aguarde...*"));
     $id = seleciona_id_aposta($texto);
     $usuarios = verifica_usuarios($id);
@@ -420,5 +613,19 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $menu_query = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $seleciona_menu = pg_query($db_handle, $menu_query);
 }
-
+}else{
+    $usuarios_antigos = $requisicao[1];
+    $id = seleciona_id_aposta($requisicao[0]);
+    $partida = $requisicao[2];
+    $j = $requisicao[3];
+    for($i=0;$i<5;$i++){
+        sleep(5);
+        $usuarios_antigos = verifica_usuario($id, $usuarios_antigos, $partida);
+    }
+    $j++;
+    if($j<=20){
+        $data = array($id, $usuarios_antigos, $partida, $j);
+        envia_dados($data);
+    }
+}
 ?>
