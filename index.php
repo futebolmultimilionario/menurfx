@@ -511,6 +511,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $id = seleciona_id_aposta($texto);
     $partida = seleciona_partida_aposta($id);
     $menu = 4;
+    $hora = time();
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Deseja realmente encerrar a seguinte aposta? ".$partida."*\n\n1. Sim\n2. Não"));
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu', numeropartida = '$texto' WHERE numero=1";
 }else if((strtolower($texto) == "sim" or $texto == "1") and $array_conversa['menu'] == 4 and ($array_conversa['hora'] + 1800) >= time()){
