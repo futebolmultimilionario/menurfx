@@ -467,7 +467,7 @@ $seleciona_conversa = pg_query($db_handle, $conversa_query);
 $array_conversa = pg_fetch_array($seleciona_conversa, 0);
 
 if(!empty($texto) and empty($array_conversa['menu'])){
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Selecione a opção desejada:*\n\n*1.* Reenviar apostas\n*2.* Religar todas as contas\n*3.* Encerrar Aposta"));
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Selecione a opção desejada:*\n\n*1.* Reenviar apostas\n*2.* Religar todas as contas\n*3.* ⚠️ Encerrar Aposta"));
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $menu = 1;
     $hora = time();
@@ -491,7 +491,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if($texto == "3" and $array_conversa['menu'] == 1 and ($array_conversa['hora'] + 1800) >= time()){
-    $mensagem = urlencode("*Digite o número de alguma aposta para encerrar:*\n\n");
+    $mensagem = urlencode("*⚠️ Digite o número de alguma aposta para encerrar:*\n\n");
     $apostas = requisitar_apostas();
     $i = 1;
     foreach($apostas as $aposta){
@@ -512,7 +512,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $partida = seleciona_partida_aposta($id);
     $menu = 4;
     $hora = time();
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Deseja realmente encerrar a seguinte aposta? ".$partida."*\n\n1. Sim\n2. Não"));
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*⚠️ Deseja realmente encerrar a seguinte aposta? ".$partida."*\n\n1. Sim\n2. Não"));
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu', numeropartida = '$texto' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
@@ -520,7 +520,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $numeropartida = seleciona_numeropartida();
     $id2 = seleciona_id2($numeropartida);
     encerra_aposta($id2);
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Comando de encerrar enviado!*"));
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*⚠️ Comando de encerrar enviado!*"));
     $usuarios_antigos = array();
     $id = seleciona_id_aposta($numeropartida);
     $partida = seleciona_partida_aposta($id);
