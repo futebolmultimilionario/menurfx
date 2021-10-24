@@ -517,11 +517,12 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu', numeropartida = '$texto' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if((strtolower($texto) == "sim" or $texto == "1") and $array_conversa['menu'] == 4 and ($array_conversa['hora'] + 1800) >= time()){
-    $id2 = seleciona_id2(seleciona_numeropartida());
+    $numeropartida = seleciona_numeropartida();
+    $id2 = seleciona_id2($numeropartida);
     encerra_aposta($id2);
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Comando de encerrar enviado!*"));
     $usuarios_antigos = array();
-    $id = seleciona_id_aposta($texto);
+    $id = seleciona_id_aposta($numeropartida);
     $partida = seleciona_partida_aposta($id);
     for($i=0;$i<5;$i++){
         sleep(5);
