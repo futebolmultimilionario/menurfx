@@ -618,8 +618,8 @@ else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa
 }
 }else{
     $usuarios_antigos = $requisicao[1];
-    $id = seleciona_id_aposta($requisicao[0]);
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode($requisicao[0]));
+    $id = seleciona_id_aposta($requisicao[0]);
     $partida = $requisicao[2];
     $j = $requisicao[3];
     for($i=0;$i<5;$i++){
