@@ -543,7 +543,6 @@ else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa
     $email_usuarios_pegaram = array();
     $mensagem = urlencode("*Status dos Usuários:*\n\n");
     foreach($usuarios as $usuario){
-        file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode($usuario['resultado']));
         if($usuario['resultado'] == 0){
             $email_usuarios_pegaram[] = $usuario['emailUsuario'];
             $array_usuarios = muda_usuario($usuario['emailUsuario'], 0);
