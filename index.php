@@ -403,7 +403,7 @@ function cadastra_apostas($apostas){
         if($aposta['tipsterAtivo'] == 'jose alberto'){
         $id = $aposta['matchID'];
         $id2 = json_decode($aposta['dadosAposta'], TRUE)['betId'];
-        $partida = $aposta[0]['evento']." - ".$aposta[0]['mercado']." - ".$aposta[0]['aposta'];
+        $partida = $aposta['evento']." - ".$aposta['mercado']." - ".$aposta['aposta'];
         $adicionar_query = "INSERT INTO aposta (numero, id, id2, partida) VALUES ('$i', '$id', '$id2', '$partida')";
         $adicionar_dados = pg_query($db_handle, $adicionar_query);
         $i++;
