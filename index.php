@@ -422,7 +422,7 @@ function seleciona_id2($numero){
 
 function seleciona_numeropartida(){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
-    $seleciona_numeropartida = "SELECT numeropartida FROM chat WHERE numero='4'";
+    $seleciona_numeropartida = "SELECT numeropartida FROM chat WHERE menu='4'";
     $result = pg_query($db_handle, $seleciona_numeropartida);
     $row = pg_fetch_assoc($result);
     $numeropartida = $row['numeropartida'];
