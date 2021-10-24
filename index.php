@@ -458,7 +458,7 @@ $token = '1krwdq4lagx0dj1p';
 
 $requisicaocod = file_get_contents("php://input");
 $requisicao = json_decode($requisicaocod, TRUE);
-if(array_key_exists("messages")){
+if(array_key_exists("messages", $requisicao)){
 $texto = urlencode($requisicao["messages"][0]["body"]);
 
 $minha = $requisicao["messages"][0]['fromMe'];
