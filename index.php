@@ -126,7 +126,7 @@ function envia_contas_encerradas($usuarios, $partida){
             $array_usuarios[$usuario][3] = " 🟢";
     }
 
-    $mensagem = urlencode("*⚠️ ENCERRANDO APOSTA\n\n".$partida."*\n\n");
+    $mensagem = urlencode("⚠️ *ENCERRANDO APOSTA*\n\n*".$partida."*\n\n");
     foreach($array_usuarios as $usuario){
         $mensagem = $mensagem.urlencode($usuario[0]." - ".$usuario[1].$usuario[3]."\n");
     }
