@@ -460,8 +460,8 @@ function pega_partidas_db($num_partidas){
     return $row;
 }
 function verifica_apostas_concluidas($array_aposta){
-    global $APIurl;
-    global $token;
+    $APIurl = 'https://eu210.chat-api.com/instance219965/';
+    $token = '1krwdq4lagx0dj1p';
     $array_aposta_cadastrada = array();
     $i = 0;
     foreach($array_aposta as $aposta){
