@@ -475,79 +475,79 @@ function verifica_apostas_concluidas($array_aposta){
     foreach($array_aposta_cadastrada as $key => $aposta){
         $array_usuarios = array("contarfxinvesting02@gmail.com" => array("02",
                                                                     "joycehenrique",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting03@gmail.com" => array("03",
                                                                     "gme777",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting05@gmail.com" => array("05",
                                                                     "brunnaqz",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting06@gmail.com" => array("06",
                                                                     "laianesouza1",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting09@gmail.com" => array("09",
                                                                     "taavinho223",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting11@gmail.com" => array("11",
                                                                     "jessicascfc",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting14@gmail.com" => array("14",
                                                                     "alyssonslv",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting16@gmail.com" => array("16",
                                                                     "joaoflaraujo",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting18@gmail.com" => array("18",
                                                                     "dantasx10",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting30@gmail.com" => array("30",
                                                                     "amandahqcm",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting31@gmail.com" => array("31",
                                                                     "socorrobe",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting33@gmail.com" => array("33",
                                                                     "diogosn20",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting34@gmail.com" => array("34",
                                                                     "davi798",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting36@gmail.com" => array("36",
                                                                     "felipepamonha",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting37@gmail.com" => array("37",
                                                                     "joaonobre22",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting38@gmail.com" => array("38",
                                                                     "evertongbabet",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting45@gmail.com" => array("45",
                                                                     "barbaramaia1",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting48@gmail.com" => array("48",
                                                                     "rbfc95",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"),
                             "contarfxinvesting49@gmail.com" => array("49",
                                                                     "clviana_victor",
-                                                                    "",
+                                                                    "0";
                                                                     " ⚫"));
         $usuarios_aposta = array();
         $controle_duplicadas = 0;
@@ -684,10 +684,9 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if(is_numeric($texto) and $array_conversa['menu'] == 3 and ($array_conversa['hora'] + 1800) >= time()){
 
-    $mensagem = urlencode(json_encode(pega_partidas_db($texto)));
+    $mensagem = urlencode(verifica_apostas_concluidas(pega_partidas_db($texto)));
     
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=teste".$mensagem."teste");
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $deletar_query = "TRUNCATE TABLE aposta";
     $deletar_dados = pg_query($db_handle, $deletar_query);
