@@ -446,7 +446,7 @@ function seleciona_id2($numero){
 
 function seleciona_numeropartida(){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
-    $seleciona_numeropartida = "SELECT numeropartida FROM chat WHERE menu='4'";
+    $seleciona_numeropartida = "SELECT numeropartida FROM chat WHERE menu='5'";
     $result = pg_query($db_handle, $seleciona_numeropartida);
     $row = pg_fetch_assoc($result);
     $numeropartida = $row['numeropartida'];
@@ -683,10 +683,13 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if(is_numeric($texto) and $array_conversa['menu'] == 3 and ($array_conversa['hora'] + 1800) >= time()){
-
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Verificando apostas...*"));
     $mensagem = urlencode(verifica_apostas_concluidas(pega_partidas_db($texto)));
-    
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
+    if($mensagem != ""){
+        file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
+    }else{
+        file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("✅ Todas as apostas foram enviadas com sucesso. Sem apostas duplicadas ou contas sem pegar!"));
+    }
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $deletar_query = "TRUNCATE TABLE aposta";
     $deletar_dados = pg_query($db_handle, $deletar_query);
