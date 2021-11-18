@@ -55,8 +55,8 @@ function verifica_usuario($id, $usuarios_antigos, $partida){
 }
 
 function envia_contas_encerradas($usuarios, $partida){
-    $APIurl = "https://eu210.chat-api.com/instance219965/";
-    $token = "1krwdq4lagx0dj1p";
+    $APIurl = getenv('API_URL');
+    $token = getenv('TOKEN');
     $array_usuarios = array("joycehenrique" => array("02",
                                                                     "joycehenrique",
                                                                     "",
@@ -609,8 +609,8 @@ function envia_dados($data){
     $result = curl_exec( $ch );
 }
 
-$APIurl = 'https://eu210.chat-api.com/instance219965/';
-$token = '1krwdq4lagx0dj1p';
+$APIurl = getenv('API_URL');
+$token = getenv('TOKEN');
 
 $requisicaocod = file_get_contents("php://input");
 $requisicao = json_decode($requisicaocod, TRUE);
