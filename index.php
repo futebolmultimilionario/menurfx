@@ -57,83 +57,17 @@ function verifica_usuario($id, $usuarios_antigos, $partida){
 function envia_contas_encerradas($usuarios, $partida){
     $APIurl = getenv('API_URL');
     $token = getenv('TOKEN');
-    $array_usuarios = array("joycehenrique" => array("02",
-                                                                    "joycehenrique",
-                                                                    "",
-                                                                    " ⚫"),
-                            "gme777" => array("03",
-                                                                    "gme777",
-                                                                    "",
-                                                                    " ⚫"),
-                            "brunnaqz" => array("05",
-                                                                    "brunnaqz",
-                                                                    "",
-                                                                    " ⚫"),
-                            "laianesouza1" => array("06",
-                                                                    "laianesouza1",
-                                                                    "",
-                                                                    " ⚫"),
-                            "taavinho223" => array("09",
-                                                                    "taavinho223",
-                                                                    "",
-                                                                    " ⚫"),
-                            "jessicascfc" => array("11",
-                                                                    "jessicascfc",
-                                                                    "",
-                                                                    " ⚫"),
-                            "alyssonslv" => array("14",
-                                                                    "alyssonslv",
-                                                                    "",
-                                                                    " ⚫"),
-                            "joaoflaraujo" => array("16",
-                                                                    "joaoflaraujo",
-                                                                    "",
-                                                                    " ⚫"),
-                            "dantasx10" => array("18",
-                                                                    "dantasx10",
-                                                                    "",
-                                                                    " ⚫"),
-                            "amandahqcm" => array("30",
-                                                                    "amandahqcm",
-                                                                    "",
-                                                                    " ⚫"),
-                            "socorrobe" => array("31",
-                                                                    "socorrobe",
-                                                                    "",
-                                                                    " ⚫"),
-                            "diogosn20" => array("33",
-                                                                    "diogosn20",
-                                                                    "",
-                                                                    " ⚫"),
-                            "davi798" => array("34",
-                                                                    "davi798",
-                                                                    "",
-                                                                    " ⚫"),
-                            "felipepamonha" => array("36",
-                                                                    "felipepamonha",
-                                                                    "",
-                                                                    " ⚫"),
-                            "joaonobre22" => array("37",
-                                                                    "joaonobre22",
-                                                                    "",
-                                                                    " ⚫"),
-                            "evertongbabet" => array("38",
-                                                                    "evertongbabet",
-                                                                    "",
-                                                                    " ⚫"),
-                            "barbaramaia1" => array("45",
-                                                                    "barbaramaia1",
-                                                                    "",
-                                                                    " ⚫"),
-                            "rbfc95" => array("48",
-                                                                    "rbfc95",
-                                                                    "",
-                                                                    " ⚫"),
-                            "clviana_victor" => array("49",
-                                                                    "clviana_victor",
-                                                                    "",
-                                                                    " ⚫"));
-                                                                    
+
+    $contas_novas = atualiza_contas();
+    $array_usuarios = [];
+
+    foreach($contas_novas as $conta){
+        $array_usuarios[$conta['usuario']][0] = $conta['numero'];
+        $array_usuarios[$conta['usuario']][1] = $conta['usuario'];
+        $array_usuarios[$conta['usuario']][2] = "";
+        $array_usuarios[$conta['usuario']][3] = " ⚫";
+    }
+
     foreach($usuarios as $usuario){
             $array_usuarios[$usuario][3] = " 🟢";
     }
@@ -873,7 +807,7 @@ else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Usuários sendo atualizados. Aguarde...*"));
     pega_usuarios_painel('60ad4808654e573f483cf80c');
     $contas = atualiza_contas();
-    $mensagem = "*Usuários atualizados:*\n\n";
+    $mensagem = urlencode("*Usuários atualizados:*\n\n");
     foreach($contas as $usuario){
         $mensagem = $mensagem.urlencode($usuario['numero']." - ".$usuario['usuario']."  🟢\n");
     }
