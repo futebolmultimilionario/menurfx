@@ -454,14 +454,15 @@ function pega_usuarios_painel($bloco){
     $hoje = strtotime(date("Y-m-d"));
     $i=0;
     foreach($response as $conta){
-        $data_sync = strtotime(str_replace(["T", "Z"], " ", $conta['dataSync']));
-        if($conta['statusPainel'] == 1 and $conta['tipsterFixo'] == $bloco and $data_sync >= ($hoje+86400)){
+        $data_atual = strtotime(str_replace(["T", "Z"], " ", $conta['dataAtual']))+86400;
+        if($conta['statusPainel'] == 1 and $conta['tipsterFixo'] == $bloco and $data_atual < $hoje){
             $array_usuarios[$i]['numero'] = substr($conta['email'], strpos($conta['email'], '@gmail.com')-2, 2);
             $array_usuarios[$i]['email'] = $conta['email'];
             $array_usuarios[$i]['usuario'] = $conta['contaBet365'];
             $i++;
         }
     }
+    
     
     array_multisort(array_map(function($element) {
         return $element['numero'];
