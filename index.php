@@ -234,7 +234,7 @@ function muda_usuario($usuario, $status){
         $array_usuarios[$conta['email']][0] = $conta['numero'];
         $array_usuarios[$conta['email']][1] = $conta['usuario'];
         $array_usuarios[$conta['email']][2] = "";
-        $array_usuarios[$conta['email']][3] = "";
+        $array_usuarios[$conta['email']][3] = " ⚫";
     }
 
     curl_setopt_array($curl, array(
@@ -454,8 +454,8 @@ function pega_usuarios_painel($bloco){
     $hoje = strtotime(date("Y-m-d"));
     $i=0;
     foreach($response as $conta){
-        $data_atual = strtotime(str_replace(["T", "Z"], " ", $conta['dataAtual']))+86400;
-        if($conta['statusPainel'] == 1 and $conta['tipsterFixo'] == $bloco and $data_atual < $hoje){
+        $data_sync = strtotime(str_replace(["T", "Z"], " ", $conta['dataSync']));
+        if($conta['statusPainel'] == 1 and $conta['tipsterFixo'] == $bloco and $data_sync > $hoje){
             $array_usuarios[$i]['numero'] = substr($conta['email'], strpos($conta['email'], '@gmail.com')-2, 2);
             $array_usuarios[$i]['email'] = $conta['email'];
             $array_usuarios[$i]['usuario'] = $conta['contaBet365'];
