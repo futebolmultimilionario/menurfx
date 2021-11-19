@@ -619,13 +619,90 @@ $texto = urlencode($requisicao["messages"][0]["body"]);
 
 $minha = $requisicao["messages"][0]['fromMe'];
 
+function pega_usuarios_painel($bloco){
+    $curl = curl_init();
+    
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://automatips.com.br/api/Adm/getUsuarios?token=YBknWTkY6FUER0owiPffbMSucHbRvqFnSxgUR7TasBXEuW1YLqBda0wi2KgQO&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'GET',
+      CURLOPT_HTTPHEADER => array(
+        'authority: automatips.com.br',
+        'sec-ch-ua: "Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"',
+        'accept: application/json, text/javascript, */*; q=0.01',
+        'content-type: application/json; charset=utf-8',
+        'x-requested-with: XMLHttpRequest',
+        'sec-ch-ua-mobile: ?0',
+        'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
+        'sec-ch-ua-platform: "Windows"',
+        'sec-fetch-site: same-origin',
+        'sec-fetch-mode: cors',
+        'sec-fetch-dest: empty',
+        'referer: https://automatips.com.br/v2/dashboardAdm.html',
+        'accept-language: pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+        'cookie: token="YBknWTkY6FUER0owiPffbMSucHbRvqFnSxgUR7TasBXEuW1YLqBda0wi2KgQO"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-11-30T02:40:16Z'
+      ),
+    ));
+    
+    $response = json_decode(curl_exec($curl), TRUE)["Data"];
+    
+    
+    curl_close($curl);
+    
+    $array_usuarios = array();
+    
+    date_default_timezone_set("America/Bahia");
+    $hoje = strtotime(date("Y-m-d"));
+    $i=0;
+    foreach($response as $conta){
+        $data_sync = strtotime(str_replace(["T", "Z"], " ", $conta['dataSync']))-3*3600;
+        if($conta['statusPainel'] == 1 and $conta['tipsterFixo'] == $bloco and $data_sync >= ($hoje+86400)){
+            $array_usuarios[$i]['numero'] = substr($conta['email'], strpos($conta['email'], '@gmail.com')-2, 2);
+            $array_usuarios[$i]['email'] = $conta['email'];
+            $array_usuarios[$i]['usuario'] = $conta['contaBet365'];
+            $i++;
+        }
+    }
+    
+    array_multisort(array_map(function($element) {
+        return $element['numero'];
+    }, $array_usuarios), SORT_ASC, $array_usuarios);
+    
+    
+    $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
+    $deletar_query = "TRUNCATE TABLE contas";
+    $deletar_dados = pg_query($db_handle, $deletar_query);
+    
+    foreach($array_usuarios as $usuario){
+        $numero = $usuario['numero'];
+        $email = $usuario['email'];
+        $conta = $usuario['usuario'];
+        $adicionar_query = "INSERT INTO contas (numero, email, usuario) VALUES ('$numero', '$email', '$conta')";
+        $adicionar_dados = pg_query($db_handle, $adicionar_query);
+    }
+    }
+
+    function atualiza_contas(){
+        $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
+        $query = "SELECT * FROM contas";
+        $rs = pg_query($db_handle, $query);
+        $row = pg_fetch_all($rs);
+
+        return $row;
+    }
+
 $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
 $conversa_query = "SELECT * FROM chat WHERE numero=1";
 $seleciona_conversa = pg_query($db_handle, $conversa_query);
 $array_conversa = pg_fetch_array($seleciona_conversa, 0);
 
 if(!empty($texto) and empty($array_conversa['menu'])){
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Selecione a opção desejada:*\n\n*1.* Reenviar apostas\n*2.* Religar todas as contas\n*3.* Verificar apostas\n*4.* ⚠️ Encerrar Aposta"));
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Selecione a opção desejada:*\n\n*1.* Reenviar apostas\n*2.* Religar todas as contas\n*3.* Verificar apostas\n*4.* ⚠️ Encerrar Aposta\n*5.* Atualizar contas"));
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $menu = 1;
     $hora = time();
@@ -792,6 +869,22 @@ else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa
     $deletar2_dados = pg_query($db_handle, $deletar2_query);
     $reiniciar =  "INSERT INTO chat (numero) VALUES (1)";
     $reiniciar_dados = pg_query($db_handle, $reiniciar);
+}else if($texto == "5" and $array_conversa['menu'] == 1 and ($array_conversa['hora'] + 1800)>= time()){
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Usuários sendo atualizados. Aguarde...*"));
+    pega_usuarios_painel('60ad4808654e573f483cf80c');
+    $contas = atualiza_contas();
+    $mensagem = "*Usuários atualizados:*\n\n";
+    foreach($contas as $usuario){
+        $mensagem = $mensagem.urlencode($usuario['numero']." - ".$usuario['usuario']."  🟢\n");
+    }
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
+    $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
+    $deletar_query = "TRUNCATE TABLE aposta";
+    $deletar_dados = pg_query($db_handle, $deletar_query);
+    $deletar2_query = "TRUNCATE TABLE chat";
+    $deletar2_dados = pg_query($db_handle, $deletar2_query);
+    $reiniciar =  "INSERT INTO chat (numero) VALUES (1)";
+    $reiniciar_dados = pg_query($db_handle, $reiniciar);
 }else{
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $deletar_query = "TRUNCATE TABLE aposta";
@@ -800,7 +893,7 @@ else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa
     $deletar2_dados = pg_query($db_handle, $deletar2_query);
     $reiniciar =  "INSERT INTO chat (numero) VALUES (1)";
     $reiniciar_dados = pg_query($db_handle, $reiniciar);
-    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Selecione a opção desejada:*\n\n*1.* Reenviar apostas\n*2.* Religar todas as contas\n*3.* Verificar apostas\n*4.* ⚠️ Encerrar Aposta"));
+    file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Selecione a opção desejada:*\n\n*1.* Reenviar apostas\n*2.* Religar todas as contas\n*3.* Verificar apostas\n*4.* ⚠️ Encerrar Aposta\n*5.* Atualizar contas"));
     $menu = 1;
     $hora = time();
     $menu_query = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
