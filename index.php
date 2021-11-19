@@ -413,16 +413,6 @@ function envia_dados($data){
     $result = curl_exec( $ch );
 }
 
-$APIurl = getenv('API_URL');
-$token = getenv('TOKEN');
-
-$requisicaocod = file_get_contents("php://input");
-$requisicao = json_decode($requisicaocod, TRUE);
-if(array_key_exists("messages", $requisicao)){
-$texto = urlencode($requisicao["messages"][0]["body"]);
-
-$minha = $requisicao["messages"][0]['fromMe'];
-
 function pega_usuarios_painel($bloco){
     $curl = curl_init();
     
@@ -464,7 +454,7 @@ function pega_usuarios_painel($bloco){
     $hoje = strtotime(date("Y-m-d"));
     $i=0;
     foreach($response as $conta){
-        $data_sync = strtotime(str_replace(["T", "Z"], " ", $conta['dataSync']))-3*3600;
+        $data_sync = strtotime(str_replace(["T", "Z"], " ", $conta['dataSync']));
         if($conta['statusPainel'] == 1 and $conta['tipsterFixo'] == $bloco and $data_sync >= ($hoje+86400)){
             $array_usuarios[$i]['numero'] = substr($conta['email'], strpos($conta['email'], '@gmail.com')-2, 2);
             $array_usuarios[$i]['email'] = $conta['email'];
@@ -489,6 +479,10 @@ function pega_usuarios_painel($bloco){
         $adicionar_query = "INSERT INTO contas (numero, email, usuario) VALUES ('$numero', '$email', '$conta')";
         $adicionar_dados = pg_query($db_handle, $adicionar_query);
     }
+    
+    
+    
+    
     }
 
     function atualiza_contas(){
@@ -499,6 +493,18 @@ function pega_usuarios_painel($bloco){
 
         return $row;
     }
+
+$APIurl = getenv('API_URL');
+$token = getenv('TOKEN');
+
+$requisicaocod = file_get_contents("php://input");
+$requisicao = json_decode($requisicaocod, TRUE);
+if(array_key_exists("messages", $requisicao)){
+$texto = urlencode($requisicao["messages"][0]["body"]);
+
+$minha = $requisicao["messages"][0]['fromMe'];
+
+
 
 $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
 $conversa_query = "SELECT * FROM chat WHERE numero=1";
