@@ -632,13 +632,19 @@ else if(is_numeric($texto) and $array_conversa['menu'] == 2 and ($array_conversa
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".urlencode("*Desligando contas. Aguarde...*"));
     $id = seleciona_id_aposta($texto);
     $usuarios = verifica_usuarios($id);
+    $contas_novas = atualiza_contas();
+    $usuarios_menu = [];
+    foreach($contas_novas as $conta){
+        $usuarios_menu[$conta['usuario']][0] = $conta['numero'];
+        $usuarios_menu[$conta['usuario']][1] = $conta['usuario'];
+        $usuarios_menu[$conta['usuario']][2] = $conta['email'];
+        $usuarios_menu[$conta['usuario']][3] = " ⚫";
+    }
     $email_usuarios_pegaram = array();
     $mensagem = urlencode("*Status dos Usuários:*\n\n");
     foreach($usuarios as $usuario){
-        if($usuario['resultado'] == 0){
-            $email_usuarios_pegaram[] = $usuario['emailUsuario'];
-            $array_usuarios = muda_usuario($usuario['emailUsuario'], 0);
-        }
+            $email_usuarios_pegaram[] = $usuarios_menu[$usuario][2];
+            $array_usuarios = muda_usuario($usuarios_menu[$usuario][2], 0);
     }
     $status = verifica_status();
 
