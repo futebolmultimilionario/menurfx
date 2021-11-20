@@ -369,9 +369,7 @@ function verifica_apostas_concluidas($array_aposta){
         foreach($aposta as $aposta_duplicada){
             $usuarios = verifica_usuarios($aposta_duplicada['id']);
             foreach($usuarios as $usuario){
-                if($usuario['resultado'] == 0){
                     $array_usuarios[$usuario][2]++;
-                }  
             }
         }
         
