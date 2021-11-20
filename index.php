@@ -358,10 +358,10 @@ function verifica_apostas_concluidas($array_aposta){
         $array_usuarios = [];
 
         foreach($contas_novas as $conta){
-            $array_usuarios[$conta['email']][0] = $conta['numero'];
-            $array_usuarios[$conta['email']][1] = $conta['usuario'];
-            $array_usuarios[$conta['email']][2] = "0";
-            $array_usuarios[$conta['email']][3] = " ⚫";
+            $array_usuarios[$conta['usuario']][0] = $conta['numero'];
+            $array_usuarios[$conta['usuario']][1] = $conta['usuario'];
+            $array_usuarios[$conta['usuario']][2] = "0";
+            $array_usuarios[$conta['usuario']][3] = " ⚫";
         }
         $usuarios_aposta = array();
         $controle_duplicadas = 0;
@@ -370,7 +370,7 @@ function verifica_apostas_concluidas($array_aposta){
             $usuarios = verifica_usuarios($aposta_duplicada['id']);
             foreach($usuarios as $usuario){
                 if($usuario['resultado'] == 0){
-                    $array_usuarios[$usuario['emailUsuario']][2]++;
+                    $array_usuarios[$usuario][2]++;
                 }  
             }
         }
