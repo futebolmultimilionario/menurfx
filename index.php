@@ -25,7 +25,7 @@ function marca_partida_repassar($fem_masc, $numero, $verd_falso){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
     $menu_query = "UPDATE '$fem_masc' SET repassar='$verd_falso' WHERE numero='$numero'";
     $rs = pg_query($db_handle, $menu_query);
-    $row = seleciona_partida_cadastrada($fem_masc)
+    $row = seleciona_partida_cadastrada($fem_masc);
     $query = "UPDATE '$fem_masc' SET numero=NULL WHERE numero IS NOT NULL";
     $rs = pg_query($db_handle, $query);
     return $row;
