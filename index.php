@@ -36,7 +36,18 @@ function seleciona_partida_cadastrada($fem_masc){
     $query = "SELECT * FROM $fem_masc WHERE repassar";
     $rs = pg_query($db_handle, $query);
     $row = pg_fetch_all($rs);
-
+    foreach($row as $partida){
+        $jogo = $partida['partida'];
+        $menu_query = "UPDATE $fem_masc SET numero='$i' WHERE partida='$jogo'";
+        $rs = pg_query($db_handle, $menu_query);
+        $i++;
+    }
+    $query = "SELECT * FROM $fem_masc";
+    $rs = pg_query($db_handle, $query);
+    $row = pg_fetch_all($rs);
+    $query = "UPDATE $fem_masc SET numero=NULL WHERE numero IS NOT NULL";
+    $rs = pg_query($db_handle, $query);
+    
     return $row;
 }
 
