@@ -615,7 +615,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $mensagem = urlencode("*Selecione a partida para avisar a reabertura:*\n\n");
     $partidas = seleciona_partidas_db("partidas");
     foreach($partidas as $partida){
-        $mensagem = $mensage.urlencode("*".$partida['numero'].".* ".$partida["partida"]."\n");
+        $mensagem = $mensagem.urlencode("*".$partida['numero'].".* ".str_replace("**", "",$partida["partida"])."\n");
     }
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $hora = time();
@@ -629,7 +629,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $mensagem = urlencode("*Partidas cadastradas:*\n\n");
     foreach($partidas as $partida){
-        $mensagem = $mensage.urlencode("*".$partida['numero'].".* ".$partida["partida"]."\n");
+        $mensagem = $mensagem.urlencode("*".$partida['numero'].".* ".str_replace("**", "",$partida["partida"])."\n");
     }
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
@@ -643,7 +643,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $mensagem = urlencode("*Selecione a partida para remover os avisos:*\n\n");
     $partidas = seleciona_partidas_cadastradas("partidas");
     foreach($partidas as $partida){
-        $mensagem = $mensage.urlencode("*".$partida['numero'].".* ".$partida["partida"]."\n");
+        $mensagem = $mensagem.urlencode("*".$partida['numero'].".* ".str_replace("**", "",$partida["partida"])."\n");
     }
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $hora = time();
@@ -657,7 +657,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $mensagem = urlencode("*Partidas cadastradas:*\n\n");
     foreach($partidas as $partida){
-        $mensagem = $mensage.urlencode("*".$partida['numero'].".* ".$partida["partida"]."\n");
+        $mensagem = $mensagem.urlencode("*".$partida['numero'].".* ".str_replace("**", "",$partida["partida"])."\n");
     }
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
