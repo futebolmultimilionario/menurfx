@@ -10,7 +10,7 @@ function seleciona_partidas_db($fem_masc){
     $i = 1;
     foreach($row as $partida){
         $jogo = $partida['partida'];
-        $menu_query = "UPDATE '$fem_masc' SET numero='$i' WHERE partida='$jogo'";
+        $menu_query = "UPDATE $fem_masc SET numero='$i' WHERE partida='$jogo'";
         $rs = pg_query($db_handle, $menu_query);
         $i++;
     }
@@ -23,28 +23,24 @@ function seleciona_partidas_db($fem_masc){
 
 function marca_partida_repassar($fem_masc, $numero, $verd_falso){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
-    $menu_query = "UPDATE '$fem_masc' SET repassar='$verd_falso' WHERE numero='$numero'";
+    $menu_query = "UPDATE $fem_masc SET repassar='$verd_falso' WHERE numero='$numero'";
     $rs = pg_query($db_handle, $menu_query);
     $row = seleciona_partida_cadastrada($fem_masc);
-    $query = "UPDATE '$fem_masc' SET numero=NULL WHERE numero IS NOT NULL";
+    $query = "UPDATE $fem_masc SET numero=NULL WHERE numero IS NOT NULL";
     $rs = pg_query($db_handle, $query);
     return $row;
 }
 
 function seleciona_partida_cadastrada($fem_masc){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
-    $query = "SELECT * FROM '$fem_masc' WHERE repassar=1";
+    $query = "SELECT * FROM $fem_masc WHERE repassar=1";
     $rs = pg_query($db_handle, $query);
     $row = pg_fetch_all($rs);
 
     return $row;
 }
 
-function seleciona($numero, $verd_falso){
-    $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
-    $menu_query = "UPDATE '$fem_masc' SET repassar='$verd_falso' WHERE numero='$numero'";
-    $rs = pg_query($db_handle, $menu_query);
-}
+
 
 function verifica_contas_encerradas($id){
     $curl = curl_init();
