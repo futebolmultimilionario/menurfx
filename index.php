@@ -628,7 +628,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if(is_numeric($texto) and $array_conversa['menu'] == 7 and ($array_conversa['hora'] + 1800) >= time()){
-    $partidas  marca_partida_repassar("partidas", $texto, 1);
+    $partidas = marca_partida_repassar("partidas", $texto, 1);
     $mensagem = urlencode("*Partida cadastrada com sucesso!*");
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $mensagem = urlencode("*Partidas cadastradas:*\n\n");
@@ -656,7 +656,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $update_menu = "UPDATE chat SET hora='$hora', menu='$menu' WHERE numero=1";
     $atualiza_menu = pg_query($db_handle, $update_menu);
 }else if(is_numeric($texto) and $array_conversa['menu'] == 8 and ($array_conversa['hora'] + 1800) >= time()){
-    $partidas  marca_partida_repassar("partidas", $texto, 0);
+    $partidas = marca_partida_repassar("partidas", $texto, 0);
     $mensagem = urlencode("*Partida removida com sucesso!*");
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     $mensagem = urlencode("*Partidas cadastradas:*\n\n");
