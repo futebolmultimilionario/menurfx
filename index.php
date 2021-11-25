@@ -641,7 +641,7 @@ if(!empty($texto) and empty($array_conversa['menu'])){
     $reiniciar_dados = pg_query($db_handle, $reiniciar);
 }else if($texto == "2" and $array_conversa['menu'] == 6 and ($array_conversa['hora'] + 1800) >= time()){
     $mensagem = urlencode("*Selecione a partida para remover os avisos:*\n\n");
-    $partidas = seleciona_partidas_cadastradas("partidas");
+    $partidas = seleciona_partida_cadastrada("partidas");
     foreach($partidas as $partida){
         $mensagem = $mensagem.urlencode("*".$partida['numero'].".* ".str_replace("**", "",$partida["partida"])."\n");
     }
