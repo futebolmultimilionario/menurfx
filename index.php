@@ -26,7 +26,7 @@ function marca_partida_repassar($fem_masc, $numero, $verd_falso){
     $menu_query = "UPDATE $fem_masc SET repassar='$verd_falso' WHERE numero='$numero'";
     $rs = pg_query($db_handle, $menu_query);
     $row = seleciona_partida_cadastrada($fem_masc);
-    $query = "UPDATE $fem_masc SET numero=NULL WHERE numero IS NOT NULL";
+    $query = "UPDATE $fem_masc SET numero='' WHERE numero IS NOT NULL";
     $rs = pg_query($db_handle, $query);
     return $row;
 }
