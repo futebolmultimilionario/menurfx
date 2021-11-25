@@ -2,7 +2,7 @@
 
 function seleciona_partidas_db($fem_masc){
     $db_handle = pg_connect("host=ec2-54-157-100-65.compute-1.amazonaws.com dbname=d6d3h3db6i6hh7 port=5432 user=imnnmotwerinrk password=8f266694114f8662be2ff79f02c184847aae067bdfda55dadeb077f49e2f60eb");
-    $query = "DELETE FROM $fem_masc WHERE TIMESTAMPDIFF(HOUR,session_time,NOW()) > 48;";
+    $query = "DELETE FROM $fem_masc WHERE NOW() - session_time < '48 hours'::interval";
     $rs = pg_query($db_handle, $query);
     $query = "SELECT * FROM '$fem_masc'";
     $rs = pg_query($db_handle, $query);
