@@ -170,9 +170,10 @@ function encerra_aposta($id){
 
 function requisitar_apostas(){
     $curl = curl_init();
-
+$response = [];
+for($i=1;$i<=2;$i++){
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://automatips.com.br/api/Bot/getBets?token=soMe6uEUlLUIi6aslS1v7ons5EHGbnTkUQDMl9inUveRfXSpIEgdsQqeKGvdF3a&pendentes=sim&tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A&_=1630162602502',
+  CURLOPT_URL => 'https://app.bcopy.com.br/tipster/getBets?page='.$i,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -181,26 +182,55 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
-    'authority: automatips.com.br',
-    'sec-ch-ua: "Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+    'authority: app.bcopy.com.br',
     'accept: application/json, text/javascript, */*; q=0.01',
-    'cache-control: no-cache',
-    'x-requested-with: XMLHttpRequest',
+    'accept-language: pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cookie: XSRF-TOKEN=eyJpdiI6IlNYZ293bzBoZElGTHZPUEV6Yklzb3c9PSIsInZhbHVlIjoiV3M3VGE4RTRhMGdVZlRCeVFTL1FzNjVkQ29ubnJpSlAzZW5VZTJ4KzR3c0poNG50OUVocjYvWTgzSEp6ZWFsNUVHRHFJYzBzMGlVSzlKdnpGOEUyeXh0WGorNTFzR0hTMHhYWHIrQzRHYVUreHZkTGFRUlA5Q3VmQkFGOE1jUTEiLCJtYWMiOiI5ZTAxMDJkYjZmODE1OGZkZTU5MjRlMjhiZTA0ODFiYzhlODYyNGNmNmI2MmQ4MDRmNzE1NzBjNTM1ZDQyMTQ5IiwidGFnIjoiIn0%3D; bcopy_session=eyJpdiI6IjdraHJNQWxNS1Jrd1A4Vk1tWkFwV2c9PSIsInZhbHVlIjoieEUwYU5NMUZjNXNsOVQwanFEMmtUSjVlakpyVUM1YW9ja3VCclVIeSt6aVYzcUVuVXVIZGpNcWtmNFRSRzFNcXBHam9PWjRGK0NIVHJsZ0VhUk9qYmxBcm4zVSs4ZjRxZGVnckJ5YjNWcnNOdlpXeVREOCtOU25ZVm5GeWd6bUciLCJtYWMiOiJmY2U4YjI1MGI4MjBmZGI3NjYyY2JkZmIxZDEwZmIwYzU5ZDY3ZDYxOTI1MzFkNmU0Njk5NzRkMjg3Y2Y0ZTNkIiwidGFnIjoiIn0%3D; XSRF-TOKEN=eyJpdiI6ImZVa2NFWjFDK0lFOXU3cVU2cnBWSXc9PSIsInZhbHVlIjoiVUc2bTF0RktpdnlnTnpHTnFsbXVnNHdVa3V5Y3dkSkRQN3RWUnY1dVM2TzF1MXJBRVlDNldhNk5sakMvN2tTQ1NCbitKVXNhZTlPMFlKVnA1MkRzeElNeGw0bjRWczl6WkgrUGh1SnByelRlN0E5TVZHZmRoT2JaTkUrWlZiejkiLCJtYWMiOiJlZTg5ZGU4MWNiNzg5NWNiZDkwYWNlZTUyMTA4NDRmNDY3NDEyMzk2MTkwY2Q5YTg3M2UwM2Q2OTM3ZjYzM2M3IiwidGFnIjoiIn0%3D; bcopy_session=eyJpdiI6ImljeWM2SDY0c29VclFNYkF0M1U4ZHc9PSIsInZhbHVlIjoiZGYxRzNKZ0dieThaTm9IMGppclk2YU5HQ0k1NjY5aDgweTcxSVROZER6RFhhWCsxelRXa0VtdXptK0xvbG1PeER0Z1RwK1lxYkx0bXdsNFI4cUNsOGFyWHlhRzJSS2F1Yy9PNktMT3FzRnFyWjZ3eTFvcmlKbGxFRm1teTZqSm0iLCJtYWMiOiI3NGEyYTFhNzUyMWRmNzQyYjc0MWQwMzM4NTkyNGE4MTUyMDIzYTU3NjEyMTdlYWM3YmI4NmVlZjgzOGZjNmFhIiwidGFnIjoiIn0%3D',
+    'referer: https://app.bcopy.com.br/tipster/dash',
+    'sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="100", "Google Chrome";v="100"',
     'sec-ch-ua-mobile: ?0',
-    'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
-    'sec-fetch-site: same-origin',
-    'sec-fetch-mode: cors',
+    'sec-ch-ua-platform: "Windows"',
     'sec-fetch-dest: empty',
-    'referer: https://automatips.com.br/v2/dashboardAdm.html',
-    'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-    'cookie: token="soMe6uEUlLUIi6aslS1v7ons5EHGbnTkUQDMl9inUveRfXSpIEgdsQqeKGvdF3a"; tokenAplicacao=JOS2F00AF043DBB75A3B12F28A5D4A1391A48EE9DD3DF424F840C63BCD3345CE02A; Servidor=http://automatips.com.br:7009; emailLogin=josealberto.gomes@hotmail.com; dtVen=2021-08-29T02:40:16Z'
+    'sec-fetch-mode: cors',
+    'sec-fetch-site: same-origin',
+    'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
+    'x-requested-with: XMLHttpRequest'
   ),
 ));
 
-    $response = json_decode(curl_exec($curl), TRUE);
+$response[] = json_decode(curl_exec($curl), TRUE)['data'];
 
-    curl_close($curl);
-    $ultimas_apostas = array_slice($response['Data'], 0, 29);
+}
+curl_close($curl);
+
+$ultimas_apostas = [];
+$array_multipla = array(2=>'Dupla', 3=>'Tripla');
+$i=1;
+foreach($response as $resposta){
+    foreach($resposta as $aposta){
+        $ultimas_apostas[$i]['id'] = $aposta['id'];
+        $ultimas_apostas[$i]['id2'] = $aposta['unicId'];
+        if($aposta['type'] == 'single'){
+            $ultimas_apostas[$i]['partida'] = $aposta['bt'][0]['fd'];
+            $ultimas_apostas[$i]['mercado'] = $aposta['bt'][0]['pt'][0]['md'];
+        }else{
+            $j = 0;
+            $ultimas_apostas[$i]['partida'] = $aposta['bt'][0]['fd'];
+            foreach($aposta['bt'] as $linha){
+                if($j>0){
+                    $ultimas_apostas[$i]['partida'] = $ultimas_apostas[$i]['partida'] . " + " . $aposta['bt'][0]['fd'];
+                }
+                $j++;
+            }
+            if(array_key_exists(sizeof($aposta['bt']), $array_multipla)){
+                $ultimas_apostas[$i]['mercado'] = $array_multipla[sizeof($aposta['bt'])];
+            }else{
+                $ultimas_apostas[$i]['mercado'] = 'Múltipla';
+            }
+        }
+        $i++;
+    }
+}
     return $ultimas_apostas;
 }
 
@@ -354,16 +384,12 @@ function cadastra_apostas($apostas){
     $deletar_query = "TRUNCATE TABLE aposta";
     $deletar_dados = pg_query($db_handle, $deletar_query);
 
-    $i = 1;
-    foreach($apostas as $aposta){
-        if($aposta['tipsterAtivo'] == 'jose alberto'){
+    foreach($apostas as $numero => $aposta){
         $id = $aposta['matchID'];
         $id2 = json_decode($aposta['dadosAposta'], TRUE)['betId'];
-        $partida = $aposta['evento']." - ".$aposta['mercado']." - ".$aposta['aposta'];
-        $adicionar_query = "INSERT INTO aposta (numero, id, id2, partida) VALUES ('$i', '$id', '$id2', '$partida')";
+        $partida = $aposta['partida']." - ".$aposta['mercado'];
+        $adicionar_query = "INSERT INTO aposta (numero, id, id2, partida) VALUES ('$numero', '$id', '$id2', '$partida')";
         $adicionar_dados = pg_query($db_handle, $adicionar_query);
-        $i++;
-        }
     }
 }
 
@@ -582,12 +608,10 @@ if(!empty($texto) and empty($array_conversa['menu'])){
 }else if($texto == "1" and $array_conversa['menu'] == 1 and ($array_conversa['hora'] + 1800) >= time()){
     $mensagem = urlencode("*Digite o número de alguma aposta para desligar as contas:*\n\n");
     $apostas = requisitar_apostas();
-    $i = 1;
-    foreach($apostas as $aposta){
-        if($aposta['tipsterAtivo'] == 'jose alberto'){
-        $mensagem = $mensagem.urlencode("*".$i.".* ".$aposta['evento']." - ".$aposta['aposta']."\n");
-        $i++;
-        }
+    
+    foreach($apostas as $numero => $aposta){
+        $mensagem = $mensagem.urlencode("*".$numero.".* ".$aposta['partida']." - ".$aposta['mercado']."\n");
+
     }
     file_get_contents($APIurl."sendMessage?token=".$token."&chatId=558399711150-1623374236@g.us&body=".$mensagem);
     cadastra_apostas($apostas);
